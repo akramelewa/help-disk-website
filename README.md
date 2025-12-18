@@ -33,6 +33,3 @@ This module relies on the following Odoo standard modules:
 * `portal`
 * `website`
 * `web`
-
----
-*Developed by AkramElewa 
