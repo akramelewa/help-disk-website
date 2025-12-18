@@ -1,0 +1,20 @@
+/* Tamkeen Helpdesk Pro */
+.o_helpdesk_kanban .o_kanban_record {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.o_helpdesk_kanban .o_kanban_record:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.form-label.required:after {
+    content: " *";
+    color: red;
+}
+
+.badge {
+    font-size: 0.9em;
+    padding: 0.4em 0.8em;
+}

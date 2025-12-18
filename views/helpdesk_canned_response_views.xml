@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_helpdesk_canned_response_form" model="ir.ui.view">
+        <field name="name">helpdesk.canned.response.form</field>
+        <field name="model">helpdesk.canned.response</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="e.g. Thank you response"/>
+                            <field name="shortcut" placeholder="e.g. /thanks"/>
+                        </group>
+                        <group>
+                            <field name="team_id"/>
+                            <field name="sequence"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="body" widget="html" placeholder="شكراً لتواصلك معنا!"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_helpdesk_canned_response_tree" model="ir.ui.view">
+        <field name="name">helpdesk.canned.response.tree</field>
+        <field name="model">helpdesk.canned.response</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="shortcut"/>
+                <field name="team_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_helpdesk_canned_response" model="ir.actions.act_window">
+        <field name="name">Canned Responses</field>
+        <field name="res_model">helpdesk.canned.response</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

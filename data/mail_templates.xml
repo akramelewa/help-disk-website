@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Template 1: Ticket Created -->
+        <record id="mail_template_ticket_created" model="mail.template">
+            <field name="name">Helpdesk: Ticket Created</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">✅ تم استلام تذكرتك #{{ object.ticket_number }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">✅ تم استلام تذكرتك</h1>
+        <p style="color: #f0f0f0; margin: 10px 0 0 0;">Ticket Received Successfully</p>
+    </div>
+    <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <p>عزيزي/عزيزتي <strong>{{ object.partner_id.name }}</strong>، 👋</p>
+        <p>شكراً لتواصلك معنا. تم استلام تذكرتك بنجاح وسيتم معالجتها في أقرب وقت ممكن.</p>
+        <div style="background: #f8f9ff; border-left: 4px solid #667eea; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #667eea; margin-top: 0;">تفاصيل التذكرة / Ticket Details</h3>
+            <p><strong>رقم التذكرة:</strong> <span style="background: #667eea; color: white; padding: 4px 12px; border-radius: 15px;">{{ object.ticket_number }}</span></p>
+            <p><strong>الموضوع:</strong> {{ object.name }}</p>
+            <p><strong>الحالة:</strong> {{ object.stage_id.name }}</p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="/my/ticket/{{ object.id }}?access_token={{ object.access_token }}" 
+               style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 40px; text-decoration: none; border-radius: 25px; display: inline-block; font-weight: bold;">
+                📱 متابعة التذكرة / Track Ticket
+            </a>
+        </div>
+    </div>
+    <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
+        <p><strong>Tamkeen Helpdesk Pro</strong><br/>نحن هنا لخدمتك 24/7</p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <!-- Template 2: Ticket Assigned -->
+        <record id="mail_template_ticket_assigned" model="mail.template">
+            <field name="name">Helpdesk: Ticket Assigned</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">👤 تم تعيين مسؤول لتذكرتك #{{ object.ticket_number }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px;">
+    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">👤 تم تعيين مسؤول</h1>
+        <p style="color: #f0f0f0;">Support Agent Assigned</p>
+    </div>
+    <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <p>تم تعيين مسؤول دعم لمتابعة تذكرتك #{{ object.ticket_number }}</p>
+        <p><strong>المسؤول:</strong> {{ object.user_id.name }}</p>
+        <p><strong>البريد:</strong> {{ object.user_id.email }}</p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <!-- Template 3: In Progress -->
+        <record id="mail_template_ticket_in_progress" model="mail.template">
+            <field name="name">Helpdesk: Ticket In Progress</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">⚙️ تذكرتك قيد المعالجة #{{ object.ticket_number }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px;">
+    <div style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a00 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">⚙️ قيد المعالجة</h1>
+        <p style="color: #f0f0f0;">We're Working On It!</p>
+    </div>
+    <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <p>نود إعلامك بأن فريقنا بدأ العمل على حل المشكلة #{{ object.ticket_number }}</p>
+        <p>سنبقيك على اطلاع بأي تطورات.</p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <!-- Template 4: Ticket Solved -->
+        <record id="mail_template_ticket_solved" model="mail.template">
+            <field name="name">Helpdesk: Ticket Solved</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">✨ تم حل تذكرتك #{{ object.ticket_number }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px;">
+    <div style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">✨ تم حل المشكلة</h1>
+        <p style="color: #f0f0f0;">Issue Resolved!</p>
+    </div>
+    <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <p>يسعدنا إعلامك بأنه تم حل المشكلة في تذكرتك #{{ object.ticket_number }} 🎉</p>
+        <p>إذا كنت راضياً عن الحل، سيتم إغلاق التذكرة قريباً.</p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <!-- Template 5: Ticket Closed -->
+        <record id="mail_template_ticket_closed" model="mail.template">
+            <field name="name">Helpdesk: Ticket Closed</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">🔒 تم إغلاق تذكرتك #{{ object.ticket_number }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <h1 style="color: white; margin: 0;">🔒 تم الإغلاق</h1>
+        <p style="color: #f0f0f0;">Ticket Closed</p>
+    </div>
+    <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px;">
+        <p>تم إغلاق تذكرتك #{{ object.ticket_number }} بنجاح. نشكرك على تواصلك معنا.</p>
+        <p>إذا واجهتك أي مشكلة أخرى، لا تتردد في التواصل معنا مرة أخرى.</p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

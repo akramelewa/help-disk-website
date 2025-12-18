@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="HelpdeskDashboard" owl="1">
+        <div class="o_helpdesk_dashboard">
+            <!-- Top Header -->
+            <div class="dashboard-header">
+                <h1>لوحة تحكم تمكين</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" t-on-click="_onRefresh">
+                        <i class="fa fa-refresh"/> تحديث
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="stats-grid">
+                <div class="stat-card total-tickets">
+                    <div class="stat-info">
+                        <h3>إجمالي التذاكر</h3>
+                        <div class="value">0</div>
+                        <div class="trend up"></div>
+                    </div>
+                    <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">
+                        <i class="fa fa-ticket-alt"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card open-tickets">
+                    <div class="stat-info">
+                        <h3>قيد المعالجة</h3>
+                        <div class="value">0</div>
+                    </div>
+                    <div class="stat-icon" style="background: #fff7ed; color: #ea580c;">
+                        <i class="fa fa-clock"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card closed-tickets">
+                    <div class="stat-info">
+                        <h3>تم الحل</h3>
+                        <div class="value">0</div>
+                    </div>
+                    <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card customer-rating">
+                    <div class="stat-info">
+                        <h3>رضا العملاء</h3>
+                        <div class="value">0/5</div>
+                    </div>
+                    <div class="stat-icon" style="background: #fdf4ff; color: #c026d3;">
+                        <i class="fa fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">حركة التذاكر (آخر 7 أيام)</div>
+                    </div>
+                    <canvas id="ticketsChart" style="height: 300px;"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">حالة التذاكر</div>
+                    </div>
+                    <canvas id="statusChart" style="height: 300px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Tickets Table -->
+            <div class="recent-tickets">
+                <div class="chart-header">
+                    <div class="chart-title">أحدث التذاكر</div>
+                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>رقم التذكرة</th>
+                            <th>العميل</th>
+                            <th>الموضوع</th>
+                            <th>التاريخ</th>
+                            <th>الأولوية</th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

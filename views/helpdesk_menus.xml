@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_helpdesk_root"
+              name="Helpdesk"
+              web_icon="tamkeen_helpdesk_pro,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_helpdesk_dashboard"
+              name="Dashboard"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_dashboard"
+              sequence="1"/>
+
+    <!-- Tickets -->
+    <menuitem id="menu_helpdesk_tickets"
+              name="Tickets"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_ticket"
+              sequence="10"/>
+
+    <!-- Teams -->
+    <menuitem id="menu_helpdesk_teams"
+              name="Teams"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_team"
+              sequence="20"/>
+
+    <!-- Reporting -->
+    <menuitem id="menu_helpdesk_reporting"
+              name="Reporting"
+              parent="menu_helpdesk_root"
+              sequence="80"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_helpdesk_configuration"
+              name="Configuration"
+              parent="menu_helpdesk_root"
+              sequence="100"/>
+
+    <!-- Stages -->
+    <menuitem id="menu_helpdesk_stages"
+              name="Stages"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_stage"
+              sequence="10"/>
+
+    <!-- SLA -->
+    <menuitem id="menu_helpdesk_sla"
+              name="SLA Policies"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_sla"
+              sequence="40"/>
+
+    <!-- Canned Responses -->
+    <menuitem id="menu_helpdesk_canned_response"
+              name="Canned Responses"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_canned_response"
+              sequence="50"/>
+
+    <!-- Assignment Rules -->
+    <menuitem id="menu_helpdesk_assignment_rule"
+              name="Assignment Rules"
+              parent="menu_helpdesk_configuration"
+              action="action_helpdesk_assignment_rule"
+              sequence="60"/>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stage_tree" model="ir.ui.view">
+        <field name="name">helpdesk.stage.tree</field>
+        <field name="model">helpdesk.stage</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="fold"/>
+                <field name="is_closed"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_stage" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">helpdesk.stage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

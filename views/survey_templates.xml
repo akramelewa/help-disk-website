@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Survey Form Template -->
+    <template id="survey_form" name="Customer Satisfaction Survey">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-3">
+                            <div class="card shadow-lg border-0">
+                                <div class="card-header bg-primary text-white text-center py-4">
+                                    <h2 class="mb-1"><i class="fa fa-star"/> تقييم الخدمة</h2>
+                                    <p class="mb-0">Customer Satisfaction Survey</p>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="alert alert-info">
+                                        <p class="mb-1"><strong>تذكرة رقم:</strong> <t t-esc="ticket.ticket_number"/></p>
+                                        <p class="mb-0"><strong>الموضوع:</strong> <t t-esc="ticket.name"/></p>
+                                    </div>
+                                    
+                                    <form action="/helpdesk/survey/submit" method="POST">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="ticket_id" t-att-value="ticket.id"/>
+                                        <input type="hidden" name="token" t-att-value="token"/>
+                                        
+                                        <div class="mb-4 text-center">
+                                            <label class="form-label mb-3"><strong>كيف تقيم خدمتنا؟</strong></label>
+                                            <div class="rating-stars" style="font-size: 50px;">
+                                                <input type="radio" name="rating" value="1" id="star1" required="required" style="display: none;"/>
+                                                <label for="star1" class="star" style="cursor: pointer; color: #ddd;">⭐</label>
+                                                
+                                                <input type="radio" name="rating" value="2" id="star2" style="display: none;"/>
+                                                <label for="star2" class="star" style="cursor: pointer; color: #ddd;">⭐</label>
+                                                
+                                                <input type="radio" name="rating" value="3" id="star3" style="display: none;"/>
+                                                <label for="star3" class="star" style="cursor: pointer; color: #ddd;">⭐</label>
+                                                
+                                                <input type="radio" name="rating" value="4" id="star4" style="display: none;"/>
+                                                <label for="star4" class="star" style="cursor: pointer; color: #ddd;">⭐</label>
+                                                
+                                                <input type="radio" name="rating" value="5" id="star5" style="display: none;"/>
+                                                <label for="star5" class="star" style="cursor: pointer; color: #ddd;">⭐</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <label class="form-label">ملاحظات إضافية (اختياري)</label>
+                                            <textarea name="comment" class="form-control" rows="4" placeholder="شاركنا رأيك..."></textarea>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                                <i class="fa fa-paper-plane"/> إرسال التقييم
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                // Star rating hover effect
+                document.querySelectorAll('.star').forEach((star, index) => {
+                    star.addEventListener('click', function() {
+                        document.querySelectorAll('.star').forEach((s, i) => {
+                            if (i <= index) {
+                                s.style.color = '#ffc107';
+                            } else {
+                                s.style.color = '#ddd';
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseenter', function() {
+                        document.querySelectorAll('.star').forEach((s, i) => {
+                            if (i <= index) {
+                                s.style.color = '#ffc107';
+                            } else {
+                                s.style.color = '#ddd';
+                            }
+                        });
+                    });
+                });
+            </script>
+        </t>
+    </template>
+
+    <!-- Thank You Page -->
+    <template id="survey_thanks" name="Survey Thank You">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-3 text-center">
+                            <div class="card shadow-lg border-0">
+                                <div class="card-body p-5">
+                                    <i class="fa fa-check-circle text-success" style="font-size: 80px;"/>
+                                    <h2 class="text-success mt-3">شكراً لك!</h2>
+                                    <p class="lead mt-4">تم إرسال تقييمك بنجاح</p>
+                                    <div class="alert alert-info mt-4">
+                                        <p class="mb-0">تقييمك: <span style="color: #ffc107; font-size: 24px;">
+                                            <t t-foreach="range(int(rating))" t-as="i">⭐</t>
+                                        </span></p>
+                                    </div>
+                                    <p class="mt-3">نقدر وقتك وآرائك. رأيك يساعدنا على تحسين خدماتنا.</p>
+                                    <div class="mt-4">
+                                        <a href="/" class="btn btn-primary btn-lg">
+                                            <i class="fa fa-home"/> العودة للرئيسية
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Already Submitted Page -->
+    <template id="survey_already_submitted" name="Survey Already Submitted">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-3">
+                            <div class="alert alert-warning text-center p-4">
+                                <i class="fa fa-info-circle" style="font-size: 60px;"/>
+                                <h3 class="mt-3">تم الإرسال مسبقاً</h3>
+                                <p class="mb-3">لقد أرسلت تقييمك لهذه التذكرة من قبل.</p>
+                                <p>تقييمك: <span style="color: #ffc107; font-size: 20px;">
+                                    <t t-foreach="range(int(ticket.customer_rating))" t-as="i">⭐</t>
+                                </span></p>
+                                <a href="/" class="btn btn-primary mt-3">العودة للرئيسية</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

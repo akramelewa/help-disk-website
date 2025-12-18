@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_ticket" model="ir.actions.report">
+        <field name="name">Ticket Report</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tamkeen_helpdesk_pro.report_ticket_document</field>
+        <field name="print_report_name">'Ticket - %s' % object.ticket_number</field>
+    </record>
+
+    <template id="report_ticket_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Support Ticket: <span t-field="doc.ticket_number"/></h2>
+                        <div class="row mt32">
+                            <div class="col-6">
+                                <strong>Customer:</strong> <span t-field="doc.partner_id.name"/><br/>
+                                <strong>Email:</strong> <span t-field="doc.partner_email"/><br/>
+                                <strong>Phone:</strong> <span t-field="doc.partner_phone"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Team:</strong> <span t-field="doc.team_id.name"/><br/>
+                                <strong>Stage:</strong> <span t-field="doc.stage_id.name"/><br/>
+                                <strong>Priority:</strong> <span t-field="doc.priority"/>
+                            </div>
+                        </div>
+                        <h3 class="mt32">Description</h3>
+                        <div t-field="doc.description"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

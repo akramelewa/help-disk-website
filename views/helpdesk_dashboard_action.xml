@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_helpdesk_dashboard_pro" model="ir.actions.client">
+        <field name="name">Dashboard Pro</field>
+        <field name="tag">helpdesk_dashboard</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Update Menu -->
+    <menuitem id="menu_helpdesk_dashboard_pro"
+              name="Dashboard Pro"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_dashboard_pro"
+              sequence="1"/>
+</odoo>
